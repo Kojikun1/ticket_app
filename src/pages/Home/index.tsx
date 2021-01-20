@@ -9,7 +9,7 @@ import base_url from "../../../base_url";
 import CustomButton from '../../components/CustomButton';
 import Card from '../../components/Card';
 
-export default function Home() {
+export default function HomeScreen() {
     const [data, setData] = useState([]);
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
@@ -71,7 +71,7 @@ export default function Home() {
                data={data}
                renderItem={({item}) => {
                  return (
-                   <Card item={item}/>
+                   <Card item={item} onPress={() => navigation.navigate("Description")}/>
                  )
                }}
             /> : <Text style={styles.notFound}>Ingressos não disponiveis para essa data</Text>}

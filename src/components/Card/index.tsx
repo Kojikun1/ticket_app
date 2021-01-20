@@ -11,12 +11,13 @@ interface TicketData {
 }
 
 interface Props {
-    item: TicketData
+    item: TicketData;
+    onPress(): void; 
 }
 
-const Card: React.FC<Props> = ({ item }) => {
+const Card: React.FC<Props> = ({ item, onPress }) => {
     return (
-        <TouchableOpacity style={styles.card}>
+        <TouchableOpacity style={styles.card} onPress={onPress}>
                     <Image 
                         source={item.image ? {uri: item.image } : defaultIMG}
                         style={styles.cardImage}

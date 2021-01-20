@@ -5,7 +5,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import Home from './src/pages/Home';
+import HomeStack from './src/routes/home.stack.routes';
 import About from './src/pages/About';
 
 const Drawer = createDrawerNavigator();
@@ -14,7 +14,7 @@ function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator>
-        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="HomeBoard" component={HomeStack}/>
         <Drawer.Screen name="About" component={About} />
       </Drawer.Navigator>
     </NavigationContainer>
