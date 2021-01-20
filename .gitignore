@@ -9,5 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 
+base_url.*
+
 # macOS
 .DS_Store
