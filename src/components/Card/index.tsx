@@ -4,11 +4,7 @@ import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 //@ts-ignore
 import defaultIMG from '../../assets/default-image.jpg';
 
-interface TicketData {
-    name: string;
-    image: string;
-    value: string;
-}
+import { TicketData } from '../../types/interfaces';
 
 interface Props {
     item: TicketData;

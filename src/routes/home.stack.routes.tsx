@@ -4,7 +4,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const HomeStack = createStackNavigator();
+import{ StackNavProps, StackParamList } from '../types/StackParamList'; 
+
+const HomeStack = createStackNavigator<StackParamList>();
 
 import HomeScreen from '../pages/Home';
 import Description from '../pages/Description';

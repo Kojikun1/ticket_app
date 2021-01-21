@@ -8,9 +8,10 @@ import convertDate from '../../utils/convertData';
 import base_url from "../../../base_url";
 import CustomButton from '../../components/CustomButton';
 import Card from '../../components/Card';
+import { TicketData } from '../../types/interfaces';
 
 export default function HomeScreen() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<TicketData[]>([]);
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
     const [isLoading,setIsLoading] = useState(false);
@@ -71,7 +72,7 @@ export default function HomeScreen() {
                data={data}
                renderItem={({item}) => {
                  return (
-                   <Card item={item} onPress={() => navigation.navigate("Description")}/>
+                   <Card item={item} onPress={() => navigation.navigate("Description", {item: item})}/>
                  )
                }}
             /> : <Text style={styles.notFound}>Ingressos não disponiveis para essa data</Text>}
