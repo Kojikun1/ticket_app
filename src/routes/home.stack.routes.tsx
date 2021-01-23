@@ -1,19 +1,22 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import{ StackNavProps, StackParamList } from '../types/StackParamList'; 
+import{ StackParamList } from '../types/StackParamList'; 
 
 const HomeStack = createStackNavigator<StackParamList>();
 
 import HomeScreen from '../pages/Home';
 import Description from '../pages/Description';
-import CartPage from '../pages/cartPage';
+import CartPage from '../pages/CartPage';
+import IncrementCart from '../components/IncrementCart';
 
+import { useCart } from '../context/cartContext';
 
 export default function HomeStackRoutes(){
+    const { ticketData } = useCart();
      const navigation = useNavigation();
       return (
           <HomeStack.Navigator>
@@ -27,7 +30,7 @@ export default function HomeStackRoutes(){
                             <TouchableOpacity style={styles.menu} onPress={() => {
                                    navigation.dispatch(DrawerActions.openDrawer());
                             }}>
-                                 <MaterialIcons name="menu" size={40} color="black" />
+                                <MaterialIcons name="menu" size={40} color="black" />
                             </TouchableOpacity>
                         )
                        },
@@ -37,7 +40,8 @@ export default function HomeStackRoutes(){
                                 onPress={() => {
                                         navigation.navigate('CartPage');
                              }}>
-                                   <MaterialIcons name="shopping-cart" size={42} color="gray" />
+                                 <MaterialIcons name="shopping-cart" size={42} color="gray" />
+                                {ticketData.length !== 0 ? <IncrementCart num={ticketData.length} /> : null}
                                </TouchableOpacity>
                            )
                        }

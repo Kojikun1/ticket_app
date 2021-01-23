@@ -60,8 +60,7 @@ export default function HomeScreen() {
                 mode={"date"}
                 is24Hour={true}
                 display="default"
-                onChange={onChange
-          }
+                onChange={onChange}
         />}
         </View>
         <View style={styles.itemsContainer} >
@@ -75,6 +74,7 @@ export default function HomeScreen() {
                    <Card item={item} onPress={() => navigation.navigate("Description", {item: item})}/>
                  )
                }}
+               keyExtractor={(item) => item.id} 
             /> : <Text style={styles.notFound}>Ingressos não disponiveis para essa data</Text>}
         </View>
    <StatusBar style="auto" />
