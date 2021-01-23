@@ -74,7 +74,10 @@ export default function HomeScreen() {
                    <Card item={item} onPress={() => navigation.navigate("Description", {item: item})}/>
                  )
                }}
-               keyExtractor={(item) => item.id} 
+               keyExtractor={(item) => item.id}
+               initialNumToRender={5}
+               onRefresh={fetchData}
+               refreshing={isLoading}
             /> : <Text style={styles.notFound}>Ingressos não disponiveis para essa data</Text>}
         </View>
    <StatusBar style="auto" />

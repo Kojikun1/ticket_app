@@ -5,6 +5,7 @@ import { TicketData } from '../types/interfaces';
 interface CartData {
      ticketData: TicketData[];
      handleTicketData(data: TicketData): void;
+     handleRemove(id: string): void;
 }
 
 const CartContext = createContext<CartData>({} as CartData)
@@ -31,9 +32,15 @@ const CartProvider: React.FC = ({ children }) =>{;
                 setTicketData([{...data,amount: Number(data.amount) + 1 }]);
             };
     };
+    function handleRemove(id: string){
+             const newArrayData = ticketData.filter( item => {
+                 return item.id !== id;
+             })
+             setTicketData(newArrayData);
+    }
 
     return (
-        <CartContext.Provider value={{ ticketData, handleTicketData }} >
+        <CartContext.Provider value={{ ticketData, handleTicketData, handleRemove }} >
              {children}
         </CartContext.Provider>
     )
