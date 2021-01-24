@@ -16,7 +16,7 @@ import IncrementCart from '../components/IncrementCart';
 import { useCart } from '../context/cartContext';
 
 export default function HomeStackRoutes(){
-    const { ticketData } = useCart();
+    const { getTotalProducts } = useCart();
      const navigation = useNavigation();
       return (
           <HomeStack.Navigator>
@@ -41,7 +41,7 @@ export default function HomeStackRoutes(){
                                         navigation.navigate('CartPage');
                              }}>
                                  <MaterialIcons name="shopping-cart" size={42} color="gray" />
-                                {ticketData.length !== 0 ? <IncrementCart num={ticketData.length} /> : null}
+                                {getTotalProducts() !== 0 ? <IncrementCart num={getTotalProducts()} /> : null}
                                </TouchableOpacity>
                            )
                        }

@@ -6,6 +6,9 @@ interface CartData {
      ticketData: TicketData[];
      handleTicketData(data: TicketData): void;
      handleRemove(id: string): void;
+     getTotalAmount(): number;
+     getTotalProducts(): number;
+
 }
 
 const CartContext = createContext<CartData>({} as CartData)
@@ -33,14 +36,32 @@ const CartProvider: React.FC = ({ children }) =>{;
             };
     };
     function handleRemove(id: string){
-             const newArrayData = ticketData.filter( item => {
-                 return item.id !== id;
-             })
+             const newArrayData = ticketData.reduce( (amt: TicketData[] ,item) => {
+                 if(item.id === id){
+                     item.amount--;
+                     return item.amount <= 0 ? amt : [...amt,item];
+                 }else {
+                      return [...amt,item];
+                 }
+             },[]);
              setTicketData(newArrayData);
     }
 
+    function getTotalAmount(){
+          const result = ticketData.reduce((amt,item) => {
+             return amt + (item.amount * Number(item.value.substring(0,3)));
+          },0)
+          return result
+    }
+    function getTotalProducts(){
+          const result = ticketData.reduce((amt,item) => {
+                return amt + item.amount;
+          },0)
+          return result;
+    }
+
     return (
-        <CartContext.Provider value={{ ticketData, handleTicketData, handleRemove }} >
+        <CartContext.Provider value={{ ticketData, handleTicketData, handleRemove, getTotalAmount, getTotalProducts }} >
              {children}
         </CartContext.Provider>
     )

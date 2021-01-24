@@ -6,13 +6,15 @@ import { useNavigation } from '@react-navigation/native';
 import { useCart } from '../../context/cartContext';
 
 import CartItem from '../../components/CartItem';
+import BuyButtom from '../../components/AddCartButton'
 
 export default function CartPage() {
     const navigation = useNavigation();
-    const { ticketData } = useCart();
+    const { ticketData, getTotalAmount } = useCart();
   return (
     <View style={styles.container}>
             {ticketData.length !== 0 ?
+            <View style={styles.container}>
             <FlatList
              data={ticketData}
              renderItem={({item})=> {
@@ -22,8 +24,14 @@ export default function CartPage() {
              }}
              keyExtractor={(item) => item.id} 
             />
+            <View>
+                 <Text style={styles.total}>TOTAL: R${getTotalAmount()}</Text>
+            </View>
+               <BuyButtom title="Finalizar Compra" onPress={() => {}} />
+           </View>
             :
-             <Text style={styles.text}>Carrinho Vazio</Text> }
+            <Text style={styles.text}>Carrinho Vazio</Text> }
+              
       <StatusBar style="auto" />
     </View>
   );
@@ -34,8 +42,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
       fontSize: 18
+  },
+  total: {
+    fontSize: 20
   }
 });
