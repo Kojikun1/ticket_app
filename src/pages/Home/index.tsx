@@ -78,6 +78,7 @@ export default function HomeScreen() {
                initialNumToRender={5}
                onRefresh={fetchData}
                refreshing={isLoading}
+               contentContainerStyle={{alignItems: "center"}}
             /> : <Text style={styles.notFound}>Ingressos não disponiveis para essa data</Text>}
         </View>
    <StatusBar style="auto" />

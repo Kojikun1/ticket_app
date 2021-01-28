@@ -4,20 +4,25 @@ import { TicketData } from '../types/interfaces';
 
 interface CartData {
      ticketData: TicketData[];
-     handleTicketData(data: TicketData): void;
+     handleTicketData(data: TicketData,amount: number): void;
      handleRemove(id: string): void;
      getTotalAmount(): number;
      getTotalProducts(): number;
+     removeById(id: string): void;
 
 }
 
 const CartContext = createContext<CartData>({} as CartData)
 
+function check0(num: number) {
+    return num <= 0 ? 1 : num;
+}
+
 
 const CartProvider: React.FC = ({ children }) =>{;
     const [ticketData,setTicketData] = useState<TicketData[]>([])
 
-    function handleTicketData(data: TicketData){
+    function handleTicketData(data: TicketData,amount: number){
           
           console.log('is running');
           let productExist = false;
@@ -25,14 +30,14 @@ const CartProvider: React.FC = ({ children }) =>{;
                 const newdata = ticketData.map(item => {
                     if(item.id === data.id){
                         productExist = true;
-                        item.amount++;
+                        item.amount += check0(amount);
                          return item;
                     }
                     return item;
                 });
-                productExist ? setTicketData(newdata) : setTicketData([...newdata,{...data,amount: Number(data.amount) + 1 }]);
+                productExist ? setTicketData(newdata) : setTicketData([...newdata,{...data,amount: check0(amount) }]);
             }else{
-                setTicketData([{...data,amount: Number(data.amount) + 1 }]);
+                setTicketData([{...data,amount: check0(amount) }]);
             };
     };
     function handleRemove(id: string){
@@ -59,9 +64,15 @@ const CartProvider: React.FC = ({ children }) =>{;
           },0)
           return result;
     }
+    function removeById(id: string){
+        const result = ticketData.filter(item => {
+            return item.id !== id;
+        });
+        setTicketData(result);
+    }
 
     return (
-        <CartContext.Provider value={{ ticketData, handleTicketData, handleRemove, getTotalAmount, getTotalProducts }} >
+        <CartContext.Provider value={{ ticketData, handleTicketData, handleRemove, getTotalAmount, getTotalProducts, removeById }} >
              {children}
         </CartContext.Provider>
     )
