@@ -16,7 +16,7 @@ const CartItem: React.FC<Props> = ({ item }) =>{
         <View style={styles.cartItem}>
             <Text>{item.name}</Text>
              <View style={styles.subContainer}>
-                <Text style={styles.subText}>R${item.value.substring(0,3)}</Text> 
+                <Text style={styles.subText}>R${Number(item.value.substring(0,3)) * item.amount}</Text> 
                 <Text style={styles.subText} >{item.amount}</Text>
                 <TouchableOpacity onPress={() => { handleRemove(item.id) }}>
                     <MaterialIcons name="remove-circle" size={24} color="black" />

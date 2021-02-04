@@ -1,4 +1,5 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, useContext, createContext, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { TicketData } from '../types/interfaces';
 
@@ -9,7 +10,6 @@ interface CartData {
      getTotalAmount(): number;
      getTotalProducts(): number;
      removeById(id: string): void;
-
 }
 
 const CartContext = createContext<CartData>({} as CartData)
@@ -21,6 +21,23 @@ function check0(num: number) {
 
 const CartProvider: React.FC = ({ children }) =>{;
     const [ticketData,setTicketData] = useState<TicketData[]>([])
+
+    useEffect(() => {
+         async function loadData(){
+               const data = await AsyncStorage.getItem('cartData');
+
+               if(data){
+                  setTicketData(JSON.parse(data));
+               }
+         }
+         loadData();
+    },[]);
+    useEffect(() => {
+       async function setDataStorage(){
+           AsyncStorage.setItem('cartData',JSON.stringify(ticketData));
+       }
+       setDataStorage();
+    },[ticketData]);
 
     function handleTicketData(data: TicketData,amount: number){
           

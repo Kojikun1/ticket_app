@@ -24,10 +24,10 @@ export default function CartPage() {
              }}
              keyExtractor={(item) => item.id} 
             />
-            <View>
+            <View style={styles.subContainer}>
                  <Text style={styles.total}>TOTAL: R${getTotalAmount()}</Text>
+                 <BuyButtom title="Finalizar Compra" onPress={() => {}} />
             </View>
-               <BuyButtom title="Finalizar Compra" onPress={() => {}} />
            </View>
             :
             <Text style={styles.text}>Carrinho Vazio</Text> }
@@ -43,6 +43,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  subContainer: {
+    marginBottom: 10,
+    alignItems: "center"
   },
   text: {
       fontSize: 18
