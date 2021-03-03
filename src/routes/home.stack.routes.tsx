@@ -11,6 +11,7 @@ const HomeStack = createStackNavigator<StackParamList>();
 import HomeScreen from '../pages/Home';
 import Description from '../pages/Description';
 import CartPage from '../pages/CartPage';
+import BuyPage from '../pages/BuyPage';
 import IncrementCart from '../components/IncrementCart';
 
 import { useCart } from '../context/cartContext';
@@ -49,6 +50,7 @@ export default function HomeStackRoutes(){
               />
               <HomeStack.Screen name="Description" component={Description} />
               <HomeStack.Screen name="CartPage" component={CartPage} />
+              <HomeStack.Screen name="BuyPage" component={BuyPage} />
           </HomeStack.Navigator>
       )
 } 

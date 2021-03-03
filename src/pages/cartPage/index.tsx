@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useCart } from '../../context/cartContext';
@@ -26,11 +26,11 @@ export default function CartPage() {
             />
             <View style={styles.subContainer}>
                  <Text style={styles.total}>TOTAL: R${getTotalAmount()}</Text>
-                 <BuyButtom title="Finalizar Compra" onPress={() => {}} />
+                 <BuyButtom title="Finalizar Compra" onPress={() => navigation.navigate("BuyPage") } />
             </View>
            </View>
             :
-            <Text style={styles.text}>Carrinho Vazio</Text> }
+          <Text style={styles.text}>Carrinho Vazio</Text> }
               
       <StatusBar style="auto" />
     </View>

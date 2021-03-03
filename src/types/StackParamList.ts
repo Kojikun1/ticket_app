@@ -8,6 +8,7 @@ export type StackParamList = {
         item: TicketData
     };
     CartPage: undefined;
+    BuyPage: undefined;
 }
 
 export type StackNavProps<T extends keyof StackParamList> = {
